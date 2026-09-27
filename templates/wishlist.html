@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='wishlist.css') }}" />
+{% endblock %}
+
+{% block main_content %}
+
+    <h1>Your Wishlist</h1>
+
+    <div class="wishlist_container">
+        {% if wishlist %}
+            <ul class="wishlist_items">
+                {% for boot in wishlist %}
+                    <li class="wishlist_item">
+                        <a href="{{ url_for('boot', boot_id=boot['boot_id']) }}"><img src="{{ url_for('static', filename='images/' ~ boot['image']) }}" alt="{{ boot['boot_name'] }}" class="wishlist_item"></a>
+                        <p>{{ boot.boot_name }} - €{{ boot.price }}</p>
+                        <div class="remove_from_wishlist">
+                            <a href="{{ url_for('remove_from_wishlist', boot_id=boot['boot_id']) }}" >Remove From Wishlist</a>
+                        </div>
+                    </li> 
+                {% endfor %}
+            </ul>
+        {% else %}
+                <p class="empty_wishlist">Your wishlist is empty!</p>
+        {% endif %}
+    </div>
+{% endblock %}

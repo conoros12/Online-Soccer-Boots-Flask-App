@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+    <h1>Admin Panel - Manage Boots</h1>
+
+    <h2>Edit Current Product</h2>
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.boot_name.label }}
+        {{ form.boot_name() }}
+        {% for error in form.boot_name.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.price.label }}
+        {{ form.price() }}
+        {% for error in form.price.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.description.label }}
+        {{ form.description() }}
+        {% for error in form.description.errors %}
+            {{ error }}
+        {% endfor %}
+        <br />
+        {{ form.submit() }}
+    </form>
+
+{% endblock %}

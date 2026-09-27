@@ -1,0 +1,70 @@
+/* Style for individual boot */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.boot-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.boot-container img {
+    width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+h1 {
+    font-size: 2em;
+    margin-top: 10px;
+}
+
+.boot-price {
+    font-size: 1.5em;
+    color: #007BFF;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.boot-description {
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.add-to-cart, .add-to-wishlist {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+}
+
+.add-to-cart:hover {
+    background: #0056b3;
+}
+
+.delete_link{
+    display: inline-block;
+    padding: 12px 20px;
+    background: #f44336;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+}
+

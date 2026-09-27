@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='our_boots.css') }}" />
+{% endblock %}
+
+{% block main_content %}
+    <header>
+        <h1>Our Boots</h1>
+    </header>
+    <div class="boot-container">
+        {% for boot in boots %}
+            <div class="boot-card">
+                <a href="{{ url_for('boot', boot_id=boot['boot_id']) }}" class="boots-link">
+                    <img src="{{ url_for('static', filename = 'images/'~boot['image']) }}" alt="{{ boot['boot_name'] }}">
+                    <P>{{ boot["boot_name"] }}</P>
+                    <p>€{{ boot["price"] }}</p>
+                    {% if g.user == 'admin' %}
+                        <a href="{{ url_for('edit_boot', boot_id=boot['boot_id']) }}" class="edit_boot">Edit</a>
+                        <a href="{{ url_for('delete_boot', boot_id=boot['boot_id']) }}" class="delete_boot">Delete</a>
+                    {% endif %}
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

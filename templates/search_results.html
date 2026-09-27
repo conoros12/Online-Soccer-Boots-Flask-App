@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='search_results.css') }}">
+{% endblock %}
+
+{% block main_content %}
+
+    <h1>Search Results for "{{ query }}"</h1>
+
+    {% if boots %}
+        <div class="boot-container">
+            {% for boot in boots %}
+                <div class="boot-card">
+                    <a href="{{ url_for('boot', boot_id=boot['boot_id']) }}" class="boots-link">
+                        <img src="{{ url_for('static', filename='images/' ~ boot['image']) }}" alt="{{ boot['boot_name'] }}">
+                        <h2>{{ boot["boot_name"] }}</h2>
+                        <p>€{{ boot["price"] }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No boots found matching "{{ query }}".</p>
+    {% endif %}
+
+{% endblock %}

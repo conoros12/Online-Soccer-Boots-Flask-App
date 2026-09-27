@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h2>Checkout</h2>
+
+
+
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{ form.first_name.label }}
+    {{ form.first_name() }}
+    {% for error in form.first_name.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.last_name.label }}
+    {{ form.last_name() }}
+    {% for error in form.last_name.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.address.label }}
+    {{ form.address() }}
+    {% for error in form.address.errors %}
+        {{ error }}
+    {% endfor %}
+    <br />
+    {{ form.payment_method.label }}
+    {{ form.payment_method() }}
+    <br />
+    {{ form.submit() }}
+</form>
+
+<h3>Order Summary</h3>
+<ul>
+    {% for boot_id, details in boots.items() %}
+        <li>{{ details.name }} - €{{ details.price }} x {{ details.quantity }}</li>
+    {% endfor %}
+</ul>
+
+<p>Total: €{{ total_price }}</p>
+
+{% endblock %}
+

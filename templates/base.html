@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{{ title }}</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+        {% block stylesheet %}
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <nav>
+                <ul class="nav_list">
+                    <li><a href="{{ url_for('index') }}" class="nav_link">Home</a></li>
+                    <li><a href="{{ url_for('boots') }}" class="nav_link">Our Boots</a></li>
+                    <li><a href="{{ url_for('cart') }}" class="nav_link"><img src="{{ url_for('static', filename='images/shopping_cart3.png') }}" alt="shopping cart image" width="25" height="25" title="shopping cart"></a></li>
+                    <li class="search-container">
+                        <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                            <input type="text" name="query" placeholder="Search boots..." required>
+                            <button type="submit">🔍</button>
+                        </form>
+                    </li>
+
+                    {% if g.user %}
+                        <li style="float:right;"><a href="{{ url_for('logout') }}" class="nav_link">Logout</a></li>
+                        <li style="float: right;"><a href="{{ url_for('wishlist') }}" class="nav_link"><img src="{{ url_for('static', filename='images/white_heart_V2.png') }}" alt="wishlist" width="20" height="20" title="wishlist"></a></li>
+                        {% if g.user == 'admin' %}
+                            <li style="float: right;"><a href="{{ url_for('add_boots') }}" class="nav_link">Add Boots</a></li>
+                        {% endif %}   
+                        <li class="user-info">User ID: {{ g.user }}</li>
+ 
+
+                    {% else %}
+                    <li style="float: right;"><a href="{{ url_for('login') }}" class="nav_link">Login</a></li>
+                    <li style="float: right;"><a href="{{ url_for('register') }}" class="nav_link">Register</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
+
+        <main>
+            {% block main_content %}
+            {% endblock %}
+        </main>
+
+        <footer>
+            <p>&copy; All rights reserved to Conor O' Sullivan</p>
+            <a href="{{ url_for('credits') }}">credits</a>
+        </footer>
+    </body>
+</html>

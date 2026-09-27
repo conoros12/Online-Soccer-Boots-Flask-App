@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{url_for('static', filename='cart.css')}}">
+{% endblock %}
+
+{% block main_content %}
+    <h1>Your Cart</h1>
+    {% if cart %}
+        <ul class="cart_list">
+            {% for boot_id in cart %}
+                <li class="cart_item">
+                    <div class="cart_details">
+                        <span class="boot_name">{{ names[boot_id] }}</span>
+                        <span class="boot_quantity">Quantity: {{ cart[boot_id] }}</span>
+                    </div>
+                <li>
+                    <a href="{{ url_for('remove_from_cart', boot_id=boot_id) }}" class="remove_from_cart">Remove from cart</a>
+                </li>
+            {% endfor %}
+            <li><a href="{{ url_for('checkout') }}" class="checkout">Checkout</a></li>
+        </ul>
+    {% else %}
+        <p>Your cart is empty</p>
+    {% endif %}
+{% endblock %}

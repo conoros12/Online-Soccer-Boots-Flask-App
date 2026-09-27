@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='boot.css') }}">
+{% endblock %}
+
+
+{% block main_content %}
+    <div class="boot-container">
+        <h1>{{ boot["boot_name"] }}</h1>
+        <img src="{{ url_for('static', filename='images/' ~ boot['image']) }}" alt="{{ boot['boot_name'] }}">
+        <p class="boot-price">€{{ boot["price"] }}</p>
+        <p class="boot-description">{{ boot["description"] }}</p>
+
+        <a href="{{ url_for('add_to_cart', boot_id=boot['boot_id']) }}" class="add-to-cart">Add to Cart</a>
+
+            <a href="{{ url_for('add_to_wishlist', boot_id=boot['boot_id']) }}" class="add-to-wishlist">Add to wishlist</a> 
+
+       
+        <div class="reviews-section">
+            <h2>Reviews</h2>
+            {% for review in reviews %}
+                <div class="review">
+                    <p>Rating: {{ review['rating'] }}⭐</p>
+                    <p>Review: {{ review['review'] }}</p>
+                    {% if g.user == 'admin' %}
+                        <a href="{{ url_for('delete_review', boot_id =boot['boot_id']) }}" class="delete_link">Delete review</a>
+                    {% endif %}  
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="review-form">
+            <h2>Submit a review</h2>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                {{ form.rating.label }}
+                {{ form.rating() }}
+                <br />
+                {% for error in form.rating.errors %}
+                    {{ error }}
+                {% endfor %}
+                <br />
+                {{ form.review.label }}
+                {{ form.review() }}
+                <br />
+                {% for error in form.review.errors %}
+                    {{ error }}
+                {% endfor %}
+                <br />
+                {{ form.submit() }}
+            </form>
+        </div>
+
+    </div>
+{% endblock %}
